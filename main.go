@@ -4,7 +4,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"hw4/uniq"
+	"./uniq"
 	"os"
 )
 
