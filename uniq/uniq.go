@@ -41,34 +41,9 @@ func LinesIsEqual(current *string, next *string, opt *Options) bool {
 	var curr, nxt string
 
 	if opt.SkipFields != 0 || opt.SkipChars != 0 {
-
-		fields := strings.Fields(*current)
-		if opt.SkipFields >= len(fields) {
-			fields = []string{}
-		} else {
-			fields = fields[opt.SkipFields:]
-		}
-		curr = strings.Join(fields, " ")
-
-		fields = strings.Fields(*next)
-		if opt.SkipFields >= len(fields) {
-			fields = []string{}
-		} else {
-			fields = fields[opt.SkipFields:]
-		}
-		nxt = strings.Join(fields, " ")
-
-		if opt.SkipChars >= len(curr) {
-			curr = ""
-		} else {
-			curr = curr[opt.SkipChars:]
-		}
-
-		if opt.SkipChars >= len(nxt) {
-			nxt = ""
-		} else {
-			nxt = nxt[opt.SkipChars:]
-		}
+		first, second := ProcessLine(current, next, opt)
+		curr = *first
+		nxt = *second
 
 	} else {
 		curr = *current
@@ -95,4 +70,35 @@ func PrintLine(w io.Writer, current *string, cnt int, opt *Options) {
 	}
 }
 
+func ProcessLine(current *string, next *string, opt *Options) (*string, *string) {
+	var empty = ""
+	fields := strings.Fields(*current)
+	if opt.SkipFields >= len(fields) {
+		fields = []string{}
+	} else {
+		fields = fields[opt.SkipFields:]
+	}
+	curr := strings.Join(fields, " ")
+
+	fields = strings.Fields(*next)
+	if opt.SkipFields >= len(fields) {
+		fields = []string{}
+	} else {
+		fields = fields[opt.SkipFields:]
+	}
+	nxt := strings.Join(fields, " ")
+
+	if opt.SkipChars >= len(curr) {
+		curr = ""
+	} else {
+		curr = curr[opt.SkipChars:]
+	}
+
+	if opt.SkipChars >= len(nxt) {
+		nxt = empty
+	} else {
+		nxt = nxt[opt.SkipChars:]
+	}
+	return &curr, &nxt
+}
 
