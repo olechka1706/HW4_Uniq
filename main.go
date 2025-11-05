@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"uniq/uniq"
 )
 
 func main() {
