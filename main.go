@@ -28,22 +28,16 @@ func main() {
 
 	if len(flag.Args()) == 1 {
 		inputFile, err := os.Open(flag.Arg(0))
-		if err != nil {
-			panic(err)
-		}
+		if err != nil { panic(err) }
 		defer inputFile.Close()
 		uniq.Uniq(inputFile, os.Stdout, opt)
 
 	} else if len(flag.Args()) == 2 {
 
 		inputFile, err := os.Open(flag.Arg(0))
-		if err != nil {
-			panic(err)
-		}
+		if err != nil { panic(err) }
 		outputFile, err := os.OpenFile(flag.Arg(1), os.O_RDWR|os.O_CREATE, 0644)
-		if err != nil {
-			panic(err)
-		}
+		if err != nil { panic(err) }
 		defer func() {
 			inputFile.Close()
 			outputFile.Close()
