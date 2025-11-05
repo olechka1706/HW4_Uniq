@@ -36,19 +36,19 @@ func main() {
 
 	} else if len(flag.Args()) == 2 {
 
-		input_file, err := os.Open(flag.Arg(0))
+		inputFile, err := os.Open(flag.Arg(0))
 		if err != nil {
 			panic(err)
 		}
-		output_file, err := os.OpenFile(flag.Arg(1), os.O_RDWR|os.O_CREATE, 0644)
+		outputFile, err := os.OpenFile(flag.Arg(1), os.O_RDWR|os.O_CREATE, 0644)
 		if err != nil {
 			panic(err)
 		}
 		defer func() {
-			input_file.Close()
-			output_file.Close()
+			inputFile.Close()
+			outputFile.Close()
 		}()
-		uniq.Uniq(input_file, output_file, opt)
+		uniq.Uniq(inputFile, outputFile, opt)
 	} else {
 		uniq.Uniq(os.Stdin, os.Stdout, opt)
 	}
