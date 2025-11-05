@@ -83,8 +83,7 @@ func TestOK(t *testing.T) {
 			Uniq(input, output, test.opt)
 			result := output.String()
 			if result != test.out {
-				t.Errorf("test OK failed, got %q, want 
-%q", result, test.out)
+				t.Errorf("test OK failed, got %q, want %q", result, test.out)
 			}
 		})
 	}
